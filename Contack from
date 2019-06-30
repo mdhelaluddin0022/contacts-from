@@ -1,0 +1,24 @@
+<?php
+$n = "";
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+$name = $fm->validation($_POST['name']);
+$email = $fm->validation($_POST['email']);
+$message = $fm->validation($_POST['message']);
+
+if($name == ""){
+$n = "<span class='error'>Please fill name filed</span>";
+}elseif($email == ""){
+$n = "<span class='error'>Please fill email filed</span>"; 
+}elseif($message == ""){
+$n = "<span class='error'>Please write your message</span>"; 
+}else{
+$query = "INSERT INTO tbl_from(name, email, message) VALUES('$name', '$email', '$message')";
+$cont = $db->insert($query);
+if($cont){
+$n = "<span class='success'>Your message sent, Thanks</span>";
+}else{
+$n = "<span class='error'>Sorry please try again.</span>";
+}
+}
+}
+?>
